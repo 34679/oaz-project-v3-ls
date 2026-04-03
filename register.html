@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - ОАЗ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donate.html">Благотворительность</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Новости</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="authNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Вход/Регистрация
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="auth-title">Регистрация</h2>
+                
+                <form class="auth-form" onsubmit="register(event)">
+                    <div class="form-group">
+                        <input type="text" id="firstName" placeholder="Имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lastName" placeholder="Фамилия" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Почта" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Пароль" required>
+                    </div>
+                    
+                    <!-- Выбор роли -->
+                    <div class="role-selector">
+                        <label class="role-option">
+                            <input type="checkbox" id="isVolunteer">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>Волонтер</span>
+                        </label>
+                        <label class="role-option">
+                            <input type="checkbox" id="isDonor">
+                            <i class="fas fa-heart"></i>
+                            <span>Благотворитель</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                    </button>
+                </form>
+                
+                <div class="auth-switch">
+                    <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- API Client -->
+    <script src="api-client.js"></script>
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+    <script>
+        // Перенаправление после регистрации
+        const originalRegister = register;
+        register = async function(event) {
+            await originalRegister(event);
+            
+            // Проверяем, была ли успешна регистрация
+            setTimeout(() => {
+                const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
+                if (redirectUrl && AppState.currentUser) {
+                    sessionStorage.removeItem('redirectAfterLogin');
+                    window.location.href = redirectUrl;
+                }
+            }, 100);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление проектами - ОАЗ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-projects-section {
+            padding: 40px 0;
+            background-color: var(--white);
+            min-height: 100vh;
+        }
+        
+        .add-project-card {
+            background-color: var(--white);
+            border: 3px dashed var(--black);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .add-project-card:hover {
+            border-color: var(--accent-pink);
+            background-color: #fff5f7;
+        }
+        
+        .add-project-card i {
+            font-size: 4rem;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+        
+        .add-project-card:hover i {
+            color: var(--accent-pink);
+        }
+        
+        .admin-project-card {
+            background-color: var(--white);
+            border: 3px dashed var(--black);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .admin-project-card:hover {
+            border-color: var(--accent-pink);
+        }
+        
+        .admin-project-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+        
+        .admin-project-info {
+            margin-bottom: 15px;
+        }
+        
+        .admin-project-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .admin-project-info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .admin-project-dates {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-top: 2px dashed #ddd;
+            border-bottom: 2px dashed #ddd;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .btn-edit-project {
+            background-color: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn-edit-project:hover {
+            background-color: var(--accent-pink);
+        }
+        
+        .modal-content {
+            border-radius: 20px;
+        }
+        
+        .modal-header {
+            border-bottom: 2px dashed #eee;
+        }
+        
+        .modal-footer {
+            border-top: 2px dashed #eee;
+        }
+        
+        .form-control, .form-select {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 12px 15px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 0.2rem rgba(247, 86, 124, 0.25);
+        }
+        
+        .btn-save-project {
+            background-color: var(--accent-pink);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .btn-save-project:hover {
+            background-color: #e0456a;
+            color: var(--white);
+        }
+        
+        .btn-delete-project {
+            background-color: #dc3545;
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .btn-delete-project:hover {
+            background-color: #c82333;
+            color: var(--white);
+        }
+        
+        /* Стили для загрузки изображений */
+        .image-upload-section {
+            margin-top: 15px;
+        }
+        
+        .image-upload-label {
+            display: block;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload-label:hover {
+            border-color: var(--accent-pink);
+            background-color: #fff5f7;
+        }
+        
+        .image-upload-input {
+            display: none;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin-projects.html">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donate.html">Благотворительность</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage-news.html">Новости</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="authNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html">
+                            <i class="fas fa-user-shield"></i> Админ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- УПРАВЛЕНИЕ ПРОЕКТАМИ -->
+    <section class="admin-projects-section">
+        <div class="container">
+            <h2 class="section-title">Проекты</h2>
+            
+            <!-- Сетка проектов -->
+            <div class="row" id="adminProjectsGrid">
+                <!-- Кнопка добавления -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="add-project-card" onclick="openProjectModal()">
+                        <i class="fas fa-plus"></i>
+                        <p>Добавить новый проект</p>
+                    </div>
+                </div>
+                <!-- Проекты загружаются через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно добавления/редактирования проекта -->
+    <div class="modal fade" id="projectModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Добавить проект</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="projectForm">
+                        <input type="hidden" id="projectId">
+                        <!-- Скрытое поле для URL изображения -->
+                        <input type="hidden" id="projectImageUrl">
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Название проекта</label>
+                                <input type="text" class="form-control" id="projectName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Краткое описание</label>
+                                <textarea class="form-control" id="projectDescription" rows="2" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Полное описание</label>
+                                <textarea class="form-control" id="projectFullDescription" rows="4"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Дата начала</label>
+                                <input type="date" class="form-control" id="projectStartDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Дата окончания</label>
+                                <input type="date" class="form-control" id="projectEndDate" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Целевая сумма (руб)</label>
+                                <input type="number" class="form-control" id="projectTargetAmount" required min="0">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Стоимость взноса (руб)</label>
+                                <input type="number" class="form-control" id="projectDonationAmount" required min="0" value="2500">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Часы проекта</label>
+                                <input type="number" class="form-control" id="projectHours" required min="0">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Статус</label>
+                                <select class="form-select" id="projectStatus">
+                                    <option value="planned">Запланирован</option>
+                                    <option value="active">Текущий</option>
+                                    <option value="completed">Завершен</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Загрузка изображения -->
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Изображение проекта</label>
+                                <div class="image-upload-section">
+                                    <label class="image-upload-label" for="projectImageUpload">
+                                        <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--accent-pink);"></i>
+                                        <p style="margin: 10px 0 0 0;">Нажмите для загрузки изображения</p>
+                                        <small style="color: #666;">Поддерживаются: JPG, PNG, GIF</small>
+                                    </label>
+                                    <input type="file" 
+                                           class="image-upload-input" 
+                                           id="projectImageUpload" 
+                                           accept="image/*"
+                                           onchange="handleImageUpload(event)">
+                                    <div class="image-preview" id="imagePreview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-delete-project" id="deleteBtn" onclick="deleteProject()" style="display: none;">Удалить</button>
+                    <button type="button" class="btn btn-save-project" onclick="saveProject()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- API Client -->
+    <script src="api-client.js"></script>
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+    <script src="admin-projects.js"></script>
+    <script>
+        // Проверка авторизации администратора
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Ждем инициализации API
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            if (!AppState.currentUser || AppState.currentUser.role !== 'admin') {
+                window.location.href = 'login.html';
+                return;
+            }
+            await loadAdminProjects();
+        });
+    </script>
+</body>
+</html>

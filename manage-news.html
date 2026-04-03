@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление новостями - ОАЗ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .manage-section {
+            padding: 40px 0;
+            background-color: var(--white);
+            min-height: 100vh;
+        }
+        
+        .manage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .manage-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .btn-add {
+            background-color: var(--accent-pink);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-add:hover {
+            background-color: #e0456a;
+        }
+        
+        .manage-card {
+            background-color: var(--primary-blue);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .manage-card-info h4 {
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+        
+        .manage-card-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+        
+        .manage-card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-edit, .btn-delete {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .btn-edit {
+            background-color: var(--white);
+            color: var(--accent-pink);
+        }
+        
+        .btn-edit:hover {
+            background-color: var(--accent-pink);
+            color: var(--white);
+        }
+        
+        .btn-delete {
+            background-color: var(--accent-pink);
+            color: var(--white);
+        }
+        
+        .btn-delete:hover {
+            background-color: #e0456a;
+        }
+        
+        .add-news-card {
+            background-color: #E8F4FF;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            border: 3px dashed var(--primary-blue);
+        }
+        
+        .add-news-card:hover {
+            border-color: var(--accent-pink);
+            background-color: #fff5f7;
+        }
+        
+        .add-news-card i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+        
+        .add-news-card:hover i {
+            color: var(--accent-pink);
+        }
+        
+        .modal-content {
+            border-radius: 20px;
+        }
+        
+        .modal-header {
+            border-bottom: 2px dashed #eee;
+        }
+        
+        .modal-footer {
+            border-top: 2px dashed #eee;
+        }
+        
+        .form-control, .form-select {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 12px 15px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 0.2rem rgba(247, 86, 124, 0.25);
+        }
+        
+        .btn-save {
+            background-color: var(--accent-pink);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .btn-save:hover {
+            background-color: #e0456a;
+            color: var(--white);
+        }
+        
+        .btn-cancel {
+            background-color: #ddd;
+            color: var(--black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        /* Стили для загрузки изображений */
+        .image-upload-section {
+            margin-top: 15px;
+        }
+        
+        .image-upload-label {
+            display: block;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload-label:hover {
+            border-color: var(--accent-pink);
+            background-color: #fff5f7;
+        }
+        
+        .image-upload-input {
+            display: none;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-projects.html">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donate.html">Благотворительность</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="manage-news.html">Новости</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="authNav">
+                    <!-- Заполняется через JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- УПРАВЛЕНИЕ НОВОСТЯМИ -->
+    <section class="manage-section">
+        <div class="container">
+            <!-- Заголовок -->
+            <div class="manage-header">
+                <h2 class="manage-title">
+                    <i class="fas fa-arrow-left" onclick="history.back()" style="cursor: pointer; margin-right: 15px;"></i>
+                    Управление новостями
+                </h2>
+                <button class="btn-add" onclick="openNewsModal()">
+                    <i class="fas fa-plus"></i> Добавить новость
+                </button>
+            </div>
+            
+            <!-- Список новостей -->
+            <div id="manageList">
+                <!-- Новости загружаются через JavaScript -->
+            </div>
+            
+            <!-- Кнопка добавления -->
+            <div class="add-news-card" onclick="openNewsModal()">
+                <i class="fas fa-plus"></i>
+                <p>Добавить новую новость</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно добавления/редактирования -->
+    <div class="modal fade" id="newsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Добавить новость</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newsForm">
+                        <input type="hidden" id="newsId">
+                        <!-- Скрытое поле для URL изображения -->
+                        <input type="hidden" id="newsImageUrl">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Заголовок</label>
+                            <input type="text" class="form-control" id="newsTitle" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Краткое описание</label>
+                            <input type="text" class="form-control" id="newsDesc" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Полный текст</label>
+                            <textarea class="form-control" id="newsContent" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Категория</label>
+                                <select class="form-select" id="newsCategory">
+                                    <option value="news">Новости</option>
+                                    <option value="work">Проделанная работа</option>
+                                    <option value="help">Помощь</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Связанный проект</label>
+                                <select class="form-select" id="newsProject">
+                                    <option value="">Без проекта</option>
+                                    <!-- Проекты загружаются через JS -->
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Загрузка изображения -->
+                        <div class="mb-3">
+                            <label class="form-label">Изображение новости</label>
+                            <div class="image-upload-section">
+                                <label class="image-upload-label" for="newsImageUpload">
+                                    <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--accent-pink);"></i>
+                                    <p style="margin: 10px 0 0 0;">Нажмите для загрузки изображения</p>
+                                    <small style="color: #666;">Поддерживаются: JPG, PNG, GIF</small>
+                                </label>
+                                <input type="file" 
+                                       class="image-upload-input" 
+                                       id="newsImageUpload" 
+                                       accept="image/*"
+                                       onchange="handleNewsImageUpload(event)">
+                                <div class="image-preview" id="newsImagePreview"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-delete" id="deleteNewsBtn" onclick="deleteNews()" style="display: none; background-color: #dc3545; color: white;">Удалить</button>
+                    <button type="button" class="btn btn-save" onclick="saveNews()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- API Client -->
+    <script src="api-client.js"></script>
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+    <script src="manage-news.js"></script>
+    <script>
+        // Проверка авторизации администратора
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Ждем инициализации API
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            if (!AppState.currentUser || AppState.currentUser.role !== 'admin') {
+                window.location.href = 'login.html';
+                return;
+            }
+            await loadManageNews();
+        });
+    </script>
+</body>
+</html>

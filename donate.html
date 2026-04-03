@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пожертвовать на проекты - ОАЗ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .custom-amount-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .custom-amount-section.active {
+            display: block;
+        }
+        
+        .payment-simulation {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .payment-simulation.active {
+            display: flex;
+        }
+        
+        .payment-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .payment-card h3 {
+            margin-bottom: 20px;
+        }
+        
+        .payment-spinner {
+            font-size: 3rem;
+            color: var(--accent-pink);
+            margin: 20px 0;
+        }
+        
+        .payment-success {
+            display: none;
+        }
+        
+        .payment-success i {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="donate.html">Благотворительность</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Новости</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="authNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Вход/Регистрация
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- СТРАНИЦА ДОНАТОВ -->
+    <section class="donate-section">
+        <div class="container">
+            <h2 class="donate-title">Пожертвовать на проекты</h2>
+            
+            <!-- Контейнер проектов -->
+            <div class="projects-container">
+                <h3 class="projects-title">Выбрать проекты</h3>
+                
+                <!-- Сетка проектов -->
+                <div class="projects-grid" id="projectsContainer">
+                    <!-- Проекты загружаются через JavaScript -->
+                </div>
+                
+                <!-- Еще -->
+                <div class="show-more" onclick="showAllProjectsModal()">
+                    <i class="fas fa-chevron-down"></i> Еще...
+                </div>
+                
+                <!-- На наше усмотрение -->
+                <div class="auto-select" onclick="enableCustomAmount()">
+                    <i class="fas fa-random"></i>
+                    <span>На наше усмотрение</span>
+                </div>
+                
+                <!-- Произвольная сумма -->
+                <div class="custom-amount-section" id="customAmountSection">
+                    <label>Введите сумму пожертвования:</label>
+                    <div class="input-group mt-2">
+                        <input type="number" class="form-control" id="customAmount" placeholder="Сумма в рублях" min="100">
+                        <span class="input-group-text">руб.</span>
+                    </div>
+                    <small class="text-muted">Минимальная сумма: 100 руб.</small>
+                </div>
+            </div>
+            
+            <!-- Итоговая сумма -->
+            <div class="donate-summary">
+                <p>Сумма вашей поддержки</p>
+                <p class="amount"><span id="donateAmount">0</span> руб.</p>
+            </div>
+            
+            <!-- Кнопка оплаты -->
+            <button class="btn-pay" onclick="processPayment()">
+                <i class="fas fa-credit-card"></i> Оплатить
+            </button>
+        </div>
+    </section>
+
+    <!-- Модальное окно всех проектов -->
+    <div class="modal fade" id="allProjectsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Все проекты</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="allProjectsGrid">
+                        <!-- Все проекты загружаются здесь -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Симуляция оплаты -->
+    <div class="payment-simulation" id="paymentSimulation">
+        <div class="payment-card">
+            <div class="payment-processing" id="paymentProcessing">
+                <h3>Обработка платежа...</h3>
+                <div class="payment-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <p>Сумма: <span id="paymentAmount">0</span> руб.</p>
+            </div>
+            <div class="payment-success" id="paymentSuccess">
+                <i class="fas fa-check-circle"></i>
+                <h3>Спасибо за ваше пожертвование!</h3>
+                <p>Ваш платеж успешно обработан.</p>
+                <button class="btn btn-primary mt-3" onclick="closePaymentSimulation()" style="background-color: #F7567C; border: none;">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- API Client -->
+    <script src="api-client.js"></script>
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+    <script src="donate.js"></script>
+</body>
+</html>

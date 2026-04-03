@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - ОАЗ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-section {
+            padding: 40px 0;
+            background-color: var(--white);
+            min-height: 100vh;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            border-radius: 20px;
+            color: white;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 3rem;
+            color: var(--primary-blue);
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .profile-role {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .book-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0;
+            background-color: var(--white);
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .book-tab {
+            flex: 1;
+            padding: 20px 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            border: none;
+            background: none;
+        }
+        
+        .book-tab:first-child {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+        
+        .book-tab:last-child {
+            background-color: var(--accent-pink);
+            color: var(--white);
+        }
+        
+        .book-tab:not(.active) {
+            opacity: 0.7;
+        }
+        
+        .book-tab:hover {
+            opacity: 1;
+        }
+        
+        .book-content {
+            padding: 40px;
+            border-radius: 0 0 20px 20px;
+            min-height: 400px;
+        }
+        
+        #volunteerBook {
+            background-color: var(--primary-blue);
+        }
+        
+        #donorBook {
+            background-color: var(--accent-pink);
+        }
+        
+        .book-title {
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+        }
+        
+        .projects-section-title {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed rgba(255,255,255,0.3);
+        }
+        
+        .projects-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .project-card {
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .project-card h5 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--black);
+        }
+        
+        .project-card p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        .show-more-projects {
+            text-align: center;
+            color: var(--white);
+            cursor: pointer;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .show-more-projects:hover {
+            opacity: 1;
+        }
+        
+        .book-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            color: var(--white);
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 2px dashed rgba(255,255,255,0.3);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .empty-projects {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            padding: 40px;
+        }
+        
+        .empty-projects i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donate.html">Благотворительность</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Новости</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="authNav">
+                    <!-- Заполняется через JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ЛИЧНЫЙ КАБИНЕТ -->
+    <section class="profile-section">
+        <div class="container">
+            <!-- Заголовок профиля -->
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-name" id="profileName">Пользователь</div>
+                <div class="profile-role" id="profileRole">Участник</div>
+            </div>
+            
+            <!-- Вкладки книжек -->
+            <div class="book-tabs">
+                <button class="book-tab active" id="volunteerTab" onclick="switchBook('volunteer')">
+                    <i class="fas fa-hands-helping"></i> Книжка волонтера
+                </button>
+                <button class="book-tab" id="donorTab" onclick="switchBook('donor')">
+                    <i class="fas fa-heart"></i> Книжка благотворителя
+                </button>
+            </div>
+            
+            <!-- Книжка волонтера -->
+            <div class="book-content" id="volunteerBook">
+                <!-- Текущие проекты -->
+                <div id="volunteerCurrentSection">
+                    <h4 class="projects-section-title"><i class="fas fa-play-circle"></i> Текущие проекты</h4>
+                    <div class="projects-list" id="volunteerCurrentProjects">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+                
+                <!-- Запланированные проекты -->
+                <div id="volunteerPlannedSection">
+                    <h4 class="projects-section-title"><i class="fas fa-calendar-alt"></i> Запланированные проекты</h4>
+                    <div class="projects-list" id="volunteerPlannedProjects">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+                
+                <!-- Архивные проекты -->
+                <div id="volunteerArchiveSection">
+                    <h4 class="projects-section-title"><i class="fas fa-archive"></i> Архивные проекты</h4>
+                    <div class="projects-list" id="volunteerArchiveProjects">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+                
+                <!-- Статистика -->
+                <div class="book-stats">
+                    <div class="stat">
+                        <div class="stat-number" id="volunteerTotalProjects">0</div>
+                        <div class="stat-label">Всего проектов</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="volunteerTotalHours">0</div>
+                        <div class="stat-label">Всего часов</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Книжка благотворителя -->
+            <div class="book-content hidden" id="donorBook">
+                <!-- Текущие проекты -->
+                <div id="donorCurrentSection">
+                    <h4 class="projects-section-title"><i class="fas fa-play-circle"></i> Текущие проекты</h4>
+                    <div class="projects-list" id="donorCurrentProjects">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+                
+                <!-- Запланированные проекты -->
+                <div id="donorPlannedSection">
+                    <h4 class="projects-section-title"><i class="fas fa-calendar-alt"></i> Запланированные проекты</h4>
+                    <div class="projects-list" id="donorPlannedProjects">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+                
+                <!-- Архивные проекты -->
+                <div id="donorArchiveSection">
+                    <h4 class="projects-section-title"><i class="fas fa-archive"></i> Архивные проекты</h4>
+                    <div class="projects-list" id="donorArchiveProjects">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+                
+                <!-- Статистика -->
+                <div class="book-stats">
+                    <div class="stat">
+                        <div class="stat-number" id="donorTotalProjects">0</div>
+                        <div class="stat-label">Всего проектов</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="donorTotalAmount">0</div>
+                        <div class="stat-label">Всего пожертвовано (руб)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- API Client -->
+    <script src="api-client.js"></script>
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+    <script src="profile.js"></script>
+    <script>
+        // Инициализация профиля при загрузке
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Ждем инициализации API
+            await new Promise(resolve => setTimeout(resolve, 100));
+            await initProfile();
+        });
+    </script>
+</body>
+</html>
