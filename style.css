@@ -53,8 +53,14 @@
 
 /* Slide Up анимация */
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(40px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 /* Slide In Left */
@@ -376,21 +382,23 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 5rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 8px #5B9BD5;
     color: #5B9BD5;
-    animation: slideUp 1s ease forwards;
+    animation: slideUp 1s ease forwards;  /* Анимация появления */
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
+    font-size: 2rem;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    text-shadow: 1px 1px 6px #5B9BD5;
     color: #5B9BD5;
-    animation: slideUp 1s ease 0.3s forwards;
-    opacity: 0;
+    animation: slideUp 1s ease 0.3s forwards;  /* С задержкой 0.3с */
+    opacity: 0;  /* Изначально невидим */
 }
 
 /* ============================================
