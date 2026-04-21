@@ -396,37 +396,31 @@ body {
 /* ============================================
    СЛАЙДЕР
    ============================================ */
-.slider-section {
-    padding: 60px 0;
-    background-color: var(--white);
-    transition: background-color 0.3s;
-}
-
 .slider-container {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
-    animation: slideUp 0.8s ease forwards;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .news-slider {
-    display: flex;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px var(--shadow-color);
+    display: flex !important;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
 .slide {
-    min-width: 100%;
-    transition: transform 0.5s ease;
+    min-width: 100% !important;
+    flex-shrink: 0 !important;
     position: relative;
-    animation: fadeIn 0.5s ease;
 }
 
 .slide img {
     width: 100%;
     height: 400px;
     object-fit: cover;
+    display: block;
 }
 
 .slide-content {
@@ -443,7 +437,6 @@ body {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 10px;
-    animation: slideInLeft 0.5s ease forwards;
 }
 
 .slide-btn {
@@ -457,15 +450,12 @@ body {
     transition: all 0.3s;
     text-decoration: none;
     display: inline-block;
-    animation: slideUp 0.5s ease 0.2s forwards;
-    opacity: 0;
+    margin-top: 10px;
 }
 
 .slide-btn:hover {
     background-color: #e0456a;
     transform: translateY(-2px);
-    color: #FCFCFC;
-    box-shadow: 0 5px 20px rgba(247, 86, 124, 0.4);
 }
 
 .slider-controls {
@@ -514,10 +504,6 @@ body {
     background-color: var(--accent-pink);
     width: 30px;
     border-radius: 6px;
-}
-
-.dot:hover {
-    transform: scale(1.2);
 }
 
 /* ============================================
