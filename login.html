@@ -18,13 +18,18 @@
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <div class="d-flex align-items-center order-lg-last">
+            <button class="theme-toggle" id="themeToggle" title="Переключить тему">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+        </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Главная</a>
+                        <a class="nav-link active" href="index.html">Главная</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="projects.html">Проекты</a>
@@ -38,7 +43,7 @@
                 </ul>
                 <ul class="navbar-nav" id="authNav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">
+                        <a class="nav-link" href="login.html">
                             <i class="fas fa-sign-in-alt"></i> Вход/Регистрация
                         </a>
                     </li>

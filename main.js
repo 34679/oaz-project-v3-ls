@@ -119,6 +119,22 @@ function initSlider() {
 }
 
 // ============================================
+// АККОРДЕОН FAQ
+// ============================================
+function toggleAccordion(header) {
+    const item = header.parentElement;
+    const allItems = document.querySelectorAll(".accordion-item");
+
+    allItems.forEach(function (otherItem) {
+        if (otherItem !== item) {
+            otherItem.classList.remove("active");
+        }
+    });
+
+    item.classList.toggle("active");
+}
+
+// ============================================
 // АУТЕНТИФИКАЦИЯ
 // ============================================
 async function register(event) {
@@ -241,4 +257,52 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('totalDonations') || document.getElementById('totalHours')) {
         loadStats();
     }
+});
+
+// ============================================
+// ТЕМНАЯ ТЕМА
+// ============================================
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+    
+    const icon = themeToggle.querySelector('i');
+    
+    // Проверяем сохранённую тему
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+    
+    themeToggle.addEventListener('click', function() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        
+        if (isDark) {
+            // Переключаем на светлую тему
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            if (icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        } else {
+            // Переключаем на темную тему
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if (icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    });
+}
+
+// Вызовите initTheme() в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    // ... остальные инициализации
 });

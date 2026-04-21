@@ -23,9 +23,14 @@
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <div class="d-flex align-items-center order-lg-last">
+            <button class="theme-toggle" id="themeToggle" title="Переключить тему">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+        </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -184,11 +189,11 @@
     </section>
 
     <!-- АККОРДЕОН FAQ -->
-    <!-- <section class="faq-section">
+    <section class="faq-section">
       <div class="container">
-        <h2 class="section-title reveal">Часто задаваемые вопросы</h2>
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
         <div class="accordion">
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
               <span
                 ><i
@@ -205,7 +210,7 @@
               присоединяться к любым активным проектам через страницу «Проекты».
             </div>
           </div>
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
               <span
                 ><i
@@ -223,7 +228,7 @@
               прогресс проекта в вашем личном кабинете.
             </div>
           </div>
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
               <span
                 ><i
@@ -241,7 +246,7 @@
               уведомления.
             </div>
           </div>
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
               <span
                 ><i
@@ -259,7 +264,7 @@
               налогового вычета.
             </div>
           </div>
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
               <span
                 ><i
@@ -279,7 +284,7 @@
           </div>
         </div>
       </div>
-    </section> -->
+    </section>
 
     <!-- РЕКЛАМНЫЙ БЛОК -->
     <section class="ad-section">
@@ -303,7 +308,7 @@
     <!-- НАША КОМАНДА -->
     <section class="team-section">
       <div class="container">
-        <h2 class="section-title reveal">Наша команда</h2>
+        <h2 class="section-title">Наша команда</h2>
         <div class="team-grid">
           <div class="team-card reveal">
             <div class="team-avatar"><i class="fas fa-microscope"></i></div>
@@ -313,7 +318,7 @@
               Кандидат биологических наук, специалист по морским млекопитающим
             </div>
           </div>
-          <div class="team-card reveal">
+          <div class="team-card">
             <div class="team-avatar"><i class="fas fa-balance-scale"></i></div>
             <div class="team-name">Дмитрий Волков</div>
             <div class="team-role">Юрист</div>
@@ -336,7 +341,7 @@
     <!-- ЯНДЕКС КАРТА -->
     <section class="map-section">
       <div class="container">
-        <h2 class="section-title reveal">Наш офис</h2>
+        <h2 class="section-title">Наш офис</h2>
         <div class="map-container reveal">
           <iframe
             src="https://yandex.ru/map-widget/v1/-/CBu7UB~LxA"
@@ -363,7 +368,7 @@
     <!-- НАМ НУЖНА ВАША ПОМОЩЬ -->
     <section class="section help-section">
       <div class="container">
-        <h2 class="section-title reveal">Нам нужна ваша помощь</h2>
+        <h2 class="section-title">Нам нужна ваша помощь</h2>
         <div class="help-buttons">
           <a href="/static/html/donate.html" class="help-btn help-btn-charity">
             <i class="fas fa-heart"></i> Благотворительность
