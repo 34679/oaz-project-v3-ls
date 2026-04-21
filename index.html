@@ -1,71 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Океанский Альянс Защиты (ОАЗ)</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- НАВИГАЦИЯ -->
     <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-water" style="color: #A0CDFF;"></i> ОА<span>З</span>
-            </a>
-            <div class="d-flex align-items-center order-lg-last">
-            <button class="theme-toggle" id="themeToggle" title="Переключить тему">
-                <i class="fas fa-moon"></i>
-            </button>
-            <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-water" style="color: #a0cdff"></i> ОА<span>З</span>
+        </a>
+        <div class="d-flex align-items-center order-lg-last">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            title="Переключить тему"
+          >
+            <i class="fas fa-moon"></i>
+          </button>
+          <button
+            class="navbar-toggler ms-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
         </div>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="projects.html">Проекты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="donate.html">Благотворительность</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="catalog.html">Новости</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav" id="authNav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="fas fa-sign-in-alt"></i> Вход/Регистрация
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Главная</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="projects.html">Проекты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="donate.html">Благотворительность</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="catalog.html">Новости</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav" id="authNav">
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">
+                <i class="fas fa-sign-in-alt"></i> Вход/Регистрация
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION С ВИДЕОФОНОМ -->
     <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Океанский Альянс Защиты</h1>
-            <p class="hero-subtitle">
-                Мы объединяем ученых, волонтеров и неравнодушных людей, 
-                чтобы спасти морские экосистемы.
-            </p>
-        </div>
+      <!-- Видеофон -->
+      <div class="hero-video-wrapper">
+        <video
+          class="hero-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1200"
+        >
+          <source src="/uploads/video/ocean-bg.mp4" type="video/mp4" />
+          <!-- Если видео не загрузится, показываем CSS fallback фон -->
+        </video>
+        <!-- CSS Fallback фон - показывается если видео не загрузилось -->
+        <div class="hero-fallback-bg"></div>
+      </div>
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <h1 class="hero-title">Океанский Альянс Защиты</h1>
+        <p class="hero-subtitle">
+          Мы объединяем ученых, волонтеров и неравнодушных людей, чтобы спасти
+          морские экосистемы.
+        </p>
+      </div>
     </section>
 
     <!-- СЛАЙДЕР НОВОСТЕЙ -->
@@ -84,9 +117,7 @@
                 <p style="margin-bottom: 15px">
                   Волонтеры собрали более 500 кг пластика за один день
                 </p>
-                <a href="/card.html" class="slide-btn"
-                  >Подробнее</a
-                >
+                <a href="/card.html" class="slide-btn">Подробнее</a>
               </div>
             </div>
             <div class="slide">
@@ -100,9 +131,7 @@
                   Успешная операция по спасению трех дельфинов на побережье
                   Крыма
                 </p>
-                <a href="/card.js" class="slide-btn"
-                  >Подробнее</a
-                >
+                <a href="/card.js" class="slide-btn">Подробнее</a>
               </div>
             </div>
             <div class="slide">
@@ -115,9 +144,7 @@
                 <p style="margin-bottom: 15px">
                   Приглашаем на ежегодный форум по защите океана 15-17 мая
                 </p>
-                <a href="/card.js" class="slide-btn"
-                  >Подробнее</a
-                >
+                <a href="/card.js" class="slide-btn">Подробнее</a>
               </div>
             </div>
           </div>
@@ -140,52 +167,28 @@
 
     <!-- О НАС -->
     <section class="section about-section">
-        <div class="container">
-            <h2 class="section-title">О нас</h2>
-            <p class="about-text">
-                «Океанский Альянс Защиты» (ОАЗ) — независимая некоммерческая организация, 
-                работающая на стыке науки, права и общественных инициатив. Мы объединяем 
-                морских биологов, экологов, юристов и волонтеров, чтобы противостоять 
-                главным угрозам российских морских вод: перелову, пластиковому загрязнению, 
-                разрушению биоразнообразия и климатическим изменениям.
-            </p>
-        </div>
+      <div class="container">
+        <h2 class="section-title">О нас</h2>
+        <p class="about-text">
+          «Океанский Альянс Защиты» (ОАЗ) — независимая некоммерческая
+          организация, работающая на стыке науки, права и общественных
+          инициатив. Мы объединяем морских биологов, экологов, юристов и
+          волонтеров, чтобы противостоять главным угрозам российских морских
+          вод: перелову, пластиковому загрязнению, разрушению биоразнообразия и
+          климатическим изменениям.
+        </p>
+      </div>
     </section>
 
     <!-- НАША МИССИЯ -->
     <section class="section mission-section">
-        <div class="container">
-            <h2 class="section-title">Наша миссия</h2>
-            <p class="mission-text">
-                «Сделать океан снова живым. Через науку — к фактам, через факты — к решениям, 
-                через решения — к реальным изменениям.»
-            </p>
-        </div>
-    </section>
-
-    <!-- НАМ НУЖНА ВАША ПОМОЩЬ -->
-    <section class="section help-section">
-        <div class="container">
-            <h2 class="section-title">Нам нужна ваша помощь</h2>
-            <div class="help-buttons">
-                <a href="donate.html" class="help-btn help-btn-charity">
-                    <i class="fas fa-heart"></i> Благотворительность
-                </a>
-                <a href="register.html" class="help-btn help-btn-volunteer">
-                    <i class="fas fa-hands-helping"></i> Волонтерство
-                </a>
-            </div>
-            <div class="help-stats">
-                <div class="stat-item">
-                    <div class="stat-value" id="totalDonations">0</div>
-                    <div class="stat-label">Всего пожертвовано руб.</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="totalHours">0</div>
-                    <div class="stat-label">Всего волонтерских часов</div>
-                </div>
-            </div>
-        </div>
+      <div class="container">
+        <h2 class="section-title">Наша миссия</h2>
+        <p class="mission-text">
+          «Сделать океан снова живым. Через науку — к фактам, через факты — к
+          решениям, через решения — к реальным изменениям.»
+        </p>
+      </div>
     </section>
 
     <!-- АККОРДЕОН FAQ -->
@@ -296,9 +299,7 @@
               Присоединяйся к тысячам неравнодушных людей. Каждое пожертвование
               — шаг к чистым морям.
             </p>
-            <a href="donate.html" class="ad-btn"
-              >Поддержать сейчас</a
-            >
+            <a href="donate.html" class="ad-btn">Поддержать сейчас</a>
           </div>
           <div class="ad-image"><i class="fas fa-water"></i></div>
         </div>
@@ -395,41 +396,42 @@
 
     <!-- ПОДВАЛ -->
     <footer class="footer">
-        <div class="container">
-            <h2 class="footer-title">Как нас найти и связаться</h2>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
-                    <p>
-                        Центральный офис<br>
-                        г. Калининград, ул.<br>
-                        Профессора Баранова, 12,<br>
-                        236000
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4><i class="fas fa-phone"></i> Контакты</h4>
-                    <p>
-                        Телефон:<br>
-                        <a href="tel:+74012553377">+7 (4012) 55-33-77</a><br><br>
-                        Email:<br>
-                        <a href="mailto:info@oaz-ocean.ru">info@oaz-ocean.ru</a>
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4><i class="fas fa-globe"></i> Социальные сети</h4>
-                    <p>
-                        Сайт:<br>
-                        <a href="https://www.oaz-ocean.ru">www.oaz-ocean.ru</a><br><br>
-                        VK: <a href="https://vk.com/oaz_ocean">@oaz_ocean</a><br>
-                        Telegram: <a href="https://t.me/oaz_ocean">t.me/oaz_ocean</a>
-                    </p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Океанский Альянс Защиты (ОАЗ). Все права защищены.</p>
-            </div>
+      <div class="container">
+        <h2 class="footer-title">Как нас найти и связаться</h2>
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
+            <p>
+              Центральный офис<br />
+              г. Калининград, ул.<br />
+              Профессора Баранова, 12,<br />
+              236000
+            </p>
+          </div>
+          <div class="footer-section">
+            <h4><i class="fas fa-phone"></i> Контакты</h4>
+            <p>
+              Телефон:<br />
+              <a href="tel:+74012553377">+7 (4012) 55-33-77</a><br /><br />
+              Email:<br />
+              <a href="mailto:info@oaz-ocean.ru">info@oaz-ocean.ru</a>
+            </p>
+          </div>
+          <div class="footer-section">
+            <h4><i class="fas fa-globe"></i> Социальные сети</h4>
+            <p>
+              Сайт:<br />
+              <a href="https://www.oaz-ocean.ru">www.oaz-ocean.ru</a
+              ><br /><br />
+              VK: <a href="https://vk.com/oaz_ocean">@oaz_ocean</a><br />
+              Telegram: <a href="https://t.me/oaz_ocean">t.me/oaz_ocean</a>
+            </p>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Океанский Альянс Защиты (ОАЗ). Все права защищены.</p>
+        </div>
+      </div>
     </footer>
 
     <!-- Bootstrap JS -->
@@ -439,32 +441,36 @@
     <!-- Custom JS -->
     <script src="main.js"></script>
     <script>
-        // Подсчет статистики при загрузке страницы
-        document.addEventListener('DOMContentLoaded', async function() {
-            await loadStats();
-        });
-        
-        async function loadStats() {
-            try {
-                // Получаем статистику через API
-                const stats = await API.getStats();
-                
-                // Форматирование и отображение
-                document.getElementById('totalDonations').textContent = formatNumber(stats.total_donations || 0);
-                document.getElementById('totalHours').textContent = formatNumber(stats.total_volunteer_hours || 0);
-            } catch (error) {
-                console.error('Error loading stats:', error);
-            }
+      // Подсчет статистики при загрузке страницы
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadStats();
+      });
+
+      async function loadStats() {
+        try {
+          // Получаем статистику через API
+          const stats = await API.getStats();
+
+          // Форматирование и отображение
+          document.getElementById("totalDonations").textContent = formatNumber(
+            stats.total_donations || 0,
+          );
+          document.getElementById("totalHours").textContent = formatNumber(
+            stats.total_volunteer_hours || 0,
+          );
+        } catch (error) {
+          console.error("Error loading stats:", error);
         }
-        
-        function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(1) + ' млн';
-            } else if (num >= 1000) {
-                return (num / 1000).toFixed(0) + ' тыс';
-            }
-            return num.toString();
+      }
+
+      function formatNumber(num) {
+        if (num >= 1000000) {
+          return (num / 1000000).toFixed(1) + " млн";
+        } else if (num >= 1000) {
+          return (num / 1000).toFixed(0) + " тыс";
         }
+        return num.toString();
+      }
     </script>
-</body>
+  </body>
 </html>
